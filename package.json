@@ -1,0 +1,81 @@
+{
+  "name": "lambda-logs-viewer",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Local web UI to browse AWS Lambda invocations and their CloudWatch logs — search, level filters, per-invocation metrics and reconstructed status.",
+  "license": "MIT",
+  "keywords": [
+    "aws",
+    "lambda",
+    "cloudwatch",
+    "logs",
+    "serverless",
+    "log-viewer",
+    "devtools",
+    "cli"
+  ],
+  "homepage": "https://github.com/clebiez/Lambda-Logs-Viewer#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clebiez/Lambda-Logs-Viewer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/clebiez/Lambda-Logs-Viewer/issues"
+  },
+  "bin": {
+    "lambda-logs-viewer": "bin/lambda-logs-viewer.js"
+  },
+  "files": ["bin/", "build/", "public/", "docs/screenshot.png", "README.md", "LICENSE"],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "dev": "react-router dev",
+    "demo": "DEMO=1 react-router dev",
+    "build": "react-router build",
+    "start": "react-router-serve ./build/server/index.js",
+    "typecheck": "react-router typegen && tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@aws-sdk/client-cloudwatch-logs": "^3.658.0",
+    "@aws-sdk/client-lambda": "^3.658.0",
+    "@aws-sdk/client-sts": "^3.658.0",
+    "@aws-sdk/credential-providers": "^3.658.0",
+    "@mantine/core": "^7.13.1",
+    "@mantine/hooks": "^7.13.1",
+    "@react-router/node": "^7.18.3",
+    "@react-router/serve": "^7.18.3",
+    "@smithy/shared-ini-file-loader": "^3.1.0",
+    "@tanstack/react-query": "^5.56.2",
+    "@tanstack/react-query-devtools": "^5.56.2",
+    "@tanstack/react-virtual": "^3.14.11",
+    "@uiw/react-json-view": "^2.0.0-alpha.30",
+    "dotenv": "^16.4.5",
+    "isbot": "^5.1.17",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router": "^7.18.3"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@react-router/dev": "^7.18.3",
+    "@types/node": "^22.7.4",
+    "@types/react": "^18.3.9",
+    "@types/react-dom": "^18.3.0",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.8",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^2.1.1"
+  },
+  "allowScripts": {
+    "@biomejs/biome@1.9.4": true,
+    "esbuild@0.28.2": true,
+    "esbuild@0.21.5": true,
+    "fsevents@2.3.3": true
+  }
+}

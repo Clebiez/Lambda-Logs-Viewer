@@ -1,0 +1,213 @@
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+}
+
+/* --- Functions rail --- */
+.fn-rail-item {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--mantine-radius-sm);
+  border-left: 2px solid transparent;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+.fn-rail-item:hover {
+  background: var(--mantine-color-default-hover);
+}
+
+.fn-rail-item[data-active] {
+  background: var(--mantine-color-lambda-light);
+  border-left-color: var(--mantine-color-lambda-6);
+}
+
+/* Drag handle to resize the functions rail. Sits on the navbar's right edge; a
+   thin invisible strip that accents on hover and while dragging. */
+.rail-resize-handle {
+  position: absolute;
+  top: 0;
+  right: -3px;
+  width: 6px;
+  height: 100%;
+  cursor: col-resize;
+  z-index: 10;
+  background: transparent;
+  transition: background-color 120ms ease;
+}
+
+.rail-resize-handle:hover,
+.rail-resize-handle[data-resizing] {
+  background: var(--mantine-color-lambda-6);
+}
+
+/* --- Log console --- */
+/* Deep, near-black surface built from Mantine's dark scale so it tracks the
+   theme rather than a hardcoded hex. */
+.log-console {
+  background: var(--mantine-color-dark-8);
+  border-radius: var(--mantine-radius-md);
+  font-family: var(--mantine-font-family-monospace);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.log-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 1px 14px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--mantine-color-gray-3);
+  border-left: 3px solid transparent;
+  transition: background-color 100ms ease;
+}
+
+.log-line:hover {
+  background: var(--mantine-color-dark-6);
+}
+
+/* Line number */
+.log-line .log-num {
+  flex: 0 0 42px;
+  text-align: right;
+  color: var(--mantine-color-dark-3);
+  user-select: none;
+}
+
+/* Timestamp */
+.log-line .log-ts {
+  flex: 0 0 96px;
+  color: var(--mantine-color-dark-2);
+  user-select: none;
+}
+
+.log-line .log-msg {
+  flex: 1;
+  color: inherit;
+}
+
+/* Level accents: the color lives mostly on the left border (a quiet signal),
+   with only a faint tint so errors/warnings stand out without shouting. */
+.log-line.lifecycle {
+  color: var(--mantine-color-blue-3);
+  border-left-color: var(--mantine-color-blue-7);
+}
+
+.log-line.level-error {
+  color: var(--mantine-color-red-4);
+  border-left-color: var(--mantine-color-red-6);
+  background: rgba(224, 49, 49, 0.06);
+}
+
+.log-line.level-warn {
+  color: var(--mantine-color-yellow-4);
+  border-left-color: var(--mantine-color-yellow-6);
+}
+
+/* REPORT metrics banner, shown above the console (not inside it). */
+.report-card {
+  background: var(--mantine-color-default);
+}
+
+.report-card__coldstart {
+  padding-left: 16px;
+  border-left: 2px solid var(--mantine-color-lambda-6);
+}
+
+/* Search match highlight — uses the Lambda accent. */
+mark {
+  background: var(--mantine-color-lambda-5);
+  color: var(--mantine-color-black);
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+/* JSON viewer block expanded below a line */
+.log-json {
+  margin: 4px 14px 8px 54px;
+  padding: 10px 12px;
+  background: var(--mantine-color-dark-7);
+  border: 1px solid var(--mantine-color-dark-4);
+  border-radius: var(--mantine-radius-sm);
+  overflow-x: auto;
+}
+
+/* Chip indicating a collapsible JSON in a line */
+.log-json-chip {
+  margin-left: 8px;
+  padding: 0 8px;
+  background: var(--mantine-color-lambda-light);
+  border: 1px solid var(--mantine-color-lambda-light-hover);
+  border-radius: 20px;
+  color: var(--mantine-color-lambda-3);
+  font-family: inherit;
+  font-size: 11.5px;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: background-color 100ms ease;
+}
+
+.log-json-chip:hover {
+  background: var(--mantine-color-lambda-light-hover);
+}
+
+/* --- Split view: invocations (left) + logs (right) --- */
+.split-view {
+  display: grid;
+  grid-template-columns: minmax(320px, 460px) 1fr;
+  gap: var(--mantine-spacing-md);
+  min-height: 0;
+}
+
+.split-view__left {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.split-view__right {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+@media (max-width: 62em) {
+  .split-view {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Invocation table: status carried by a quiet left border, not a fill --- */
+.inv-row td:first-child {
+  border-left: 3px solid transparent;
+}
+
+.inv-row td {
+  transition: background-color 100ms ease;
+}
+
+.inv-row.inv-error td:first-child {
+  border-left-color: var(--mantine-color-red-6);
+}
+
+.inv-row.inv-success td:first-child {
+  border-left-color: var(--mantine-color-green-6);
+}
+
+.inv-row.inv-unknown td:first-child {
+  border-left-color: var(--mantine-color-dark-3);
+}
+
+/* Selected row wins over status tint. */
+.inv-row[data-selected] td {
+  background: var(--mantine-color-lambda-light) !important;
+}
+
+.inv-row[data-selected] td:first-child {
+  border-left-color: var(--mantine-color-lambda-6);
+}
