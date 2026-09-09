@@ -1,6 +1,6 @@
 {
   "name": "lambda-logs-viewer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "Local web UI to browse AWS Lambda invocations and their CloudWatch logs — search, level filters, per-invocation metrics and reconstructed status.",
   "license": "MIT",
